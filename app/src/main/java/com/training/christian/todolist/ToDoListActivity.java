@@ -18,6 +18,9 @@ public class ToDoListActivity extends AppCompatActivity {
     @BindView(R.id.task_list)
     RecyclerView mToDoList;
 
+    private TaskDataBase mTaskDatabase = new MemoryTaskDataBase();
+    private ToDoTaskAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,19 +31,16 @@ public class ToDoListActivity extends AppCompatActivity {
         // Układ pionowy - 1 element a wiersz
         mToDoList.setLayoutManager(new LinearLayoutManager(this));
 
-        List<ToDoTask> tasks = new LinkedList<>();
-        ToDoTask task = new ToDoTask();
-        task.setName("Zadanie1");
-        task.setDone(true);
-        tasks.add(task);
 
-        ToDoTask task1 = new ToDoTask();
-        task1.setName("Zadanie2");
-        task1.setDone(true);
-        tasks.add(task1);
-
-        ToDoTaskAdapter adapter = new ToDoTaskAdapter(tasks);
+        adapter = new ToDoTaskAdapter(mTaskDatabase.getTask());
         mToDoList.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.setTasks(mTaskDatabase.getTask());
+
     }
 
     @Override
@@ -48,6 +48,8 @@ public class ToDoListActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_todolist, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

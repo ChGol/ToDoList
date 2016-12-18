@@ -1,0 +1,20 @@
+package com.training.christian.todolist;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+public class MemoryTaskDataBase implements TaskDataBase {
+
+    private static List<ToDoTask> mTasks = new LinkedList<>();
+
+    @Override
+    public List<ToDoTask> getTask() {
+        return Collections.unmodifiableList(mTasks);
+    }
+
+    @Override
+    public void addTask(ToDoTask task) {
+    mTasks.add(task);
+    }
+}

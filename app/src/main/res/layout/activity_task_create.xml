@@ -17,6 +17,8 @@
         <EditText
             android:id="@+id/task_title"
             android:hint="Tytuł zadania"
+            android:inputType="textCapSentences"
+            android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
@@ -25,7 +27,8 @@
             android:gravity="top"
             android:hint="Notatka do zadania"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences|textMultiLine"/>
         <EditText
             android:id="@+id/btn_save"
             android:hint="Zapisz"

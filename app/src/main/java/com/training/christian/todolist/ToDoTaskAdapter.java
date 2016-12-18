@@ -14,10 +14,15 @@ import butterknife.ButterKnife;
 
 public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoViewHolder> {
 
-    private List<ToDoTask> mTask;
+    private List<ToDoTask> mTasks;
 
-    public ToDoTaskAdapter(List<ToDoTask> mTask) {
-        this.mTask = mTask;
+    public ToDoTaskAdapter(List<ToDoTask> mTasks) {
+        this.mTasks = mTasks;
+    }
+
+    public void setTasks(List<ToDoTask> tasks) {
+        mTasks = tasks;
+        notifyDataSetChanged();
     }
 
     public ToDoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,7 +34,7 @@ public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoVi
     @Override
     public void onBindViewHolder(ToDoViewHolder holder, int position) {
         //1 Pobranie elementu danyh na poycji position
-        ToDoTask task = mTask.get(position);
+        ToDoTask task = mTasks.get(position);
         //2 uzupełnienie widoku holdera na podstawie pobraengo obiektu
         holder.mTilte.setText(task.getName());
         holder.mDone.setChecked(task.isDone());
@@ -37,7 +42,7 @@ public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoVi
 
     @Override
     public int getItemCount() {
-        return mTask.size();
+        return mTasks.size();
     }
 
     public class ToDoViewHolder extends RecyclerView.ViewHolder {
