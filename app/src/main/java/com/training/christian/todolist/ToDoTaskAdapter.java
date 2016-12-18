@@ -11,13 +11,16 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoViewHolder> {
 
     private List<ToDoTask> mTasks;
+    private OnClickListener mClickListener;
 
-    public ToDoTaskAdapter(List<ToDoTask> mTasks) {
+    public ToDoTaskAdapter(List<ToDoTask> mTasks, OnClickListener mClickListener) {
         this.mTasks = mTasks;
+        this.mClickListener = mClickListener;
     }
 
     public void setTasks(List<ToDoTask> tasks) {
@@ -38,6 +41,8 @@ public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoVi
         //2 uzupełnienie widoku holdera na podstawie pobraengo obiektu
         holder.mTilte.setText(task.getName());
         holder.mDone.setChecked(task.isDone());
+        holder.mCurrentTask = task;
+        holder.mCurrentPosition = position;
     }
 
     @Override
@@ -52,9 +57,23 @@ public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoVi
         @BindView(R.id.task_title)
         TextView mTilte;
 
+        ToDoTask mCurrentTask;
+        int mCurrentPosition;
+
         public ToDoViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+        @OnClick
+        void onItemClick(){
+            if (mClickListener!=null){
+                mClickListener.onClick(mCurrentTask, mCurrentPosition);
+            }
+        }
+    }
+
+    public interface OnClickListener {
+        void onClick(ToDoTask task, int position);
     }
 }

@@ -7,14 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.util.LinkedList;
-import java.util.List;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ToDoListActivity extends AppCompatActivity {
+public class ToDoListActivity extends AppCompatActivity implements ToDoTaskAdapter.OnClickListener {
     @BindView(R.id.task_list)
     RecyclerView mToDoList;
 
@@ -32,7 +30,7 @@ public class ToDoListActivity extends AppCompatActivity {
         mToDoList.setLayoutManager(new LinearLayoutManager(this));
 
 
-        adapter = new ToDoTaskAdapter(mTaskDatabase.getTask());
+        adapter = new ToDoTaskAdapter(mTaskDatabase.getTask(), this);
         mToDoList.setAdapter(adapter);
     }
 
@@ -59,5 +57,10 @@ public class ToDoListActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(ToDoTask task, int position) {
+        Toast.makeText(this, "Klik "+position, Toast.LENGTH_SHORT).show();
     }
 }
