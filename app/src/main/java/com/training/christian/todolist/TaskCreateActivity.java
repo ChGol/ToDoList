@@ -13,7 +13,7 @@ import butterknife.OnClick;
 
 public class TaskCreateActivity extends AppCompatActivity {
 
-    private TaskDataBase mTaskDatabase = new MemoryTaskDataBase();
+    private TaskDataBase mTaskDatabase;
 
     @BindView(R.id.task_title)
     EditText mTaskTitle;
@@ -28,6 +28,8 @@ public class TaskCreateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_create);
         ButterKnife.bind(this);
+
+        mTaskDatabase = new SQlLiteTaskDatabase(this);
 
         if (getIntent().hasExtra("pos")) {
             mPosition = getIntent().getIntExtra("pos", -1);

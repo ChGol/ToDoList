@@ -16,7 +16,7 @@ public class ToDoListActivity extends AppCompatActivity implements ToDoTaskAdapt
     @BindView(R.id.task_list)
     RecyclerView mToDoList;
 
-    private TaskDataBase mTaskDatabase = new MemoryTaskDataBase();
+    private TaskDataBase mTaskDatabase;
     private ToDoTaskAdapter adapter;
 
     @Override
@@ -24,6 +24,8 @@ public class ToDoListActivity extends AppCompatActivity implements ToDoTaskAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do_list);
         ButterKnife.bind(this);
+
+        mTaskDatabase = new SQlLiteTaskDatabase(this);
 
         // 1. W jakim układzie maja wyświtlać się elementy listy
         // Układ pionowy - 1 element a wiersz

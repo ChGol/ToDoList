@@ -42,7 +42,7 @@ public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoVi
         //2 uzupełnienie widoku holdera na podstawie pobraengo obiektu
         holder.mBlockListeners = true;// Blokujemy wysylanie powIADOMIEN O ZMIANIE CHECKBOXA i click
         holder.mCurrentTask = task;
-        holder.mCurrentPosition = position;
+        holder.mCurrentPosition = task.getId();
         holder.mTilte.setText(task.getName());
         holder.mDone.setChecked(task.isDone());
         holder.mBlockListeners = false;
