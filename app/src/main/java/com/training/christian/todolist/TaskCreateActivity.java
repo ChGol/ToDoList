@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -104,10 +105,12 @@ public class TaskCreateActivity extends AppCompatActivity {
                     mTaskRemiderDate.getDayOfMonth(),
                     hour, minute);
 
-            //Date reminderDate = new Date(mTaskRemiderDate.getYear(),
-            //        mTaskRemiderDate.getMonth(),
-            //        mTaskRemiderDate.getDayOfMonth(),
-            //        mTaskPicker.getCurrentHour(), mTaskPicker.getCurrentMinute());
+            if (reminderCalendar.before(Calendar.getInstance())) {
+                Toast.makeText(this, "Data powiadomienia musi być poźniejsz niż teraz !",
+                        Toast.LENGTH_LONG)
+                        .show();
+                return;
+            }
 
             task.setReminderDate(reminderCalendar.getTime());
         }
