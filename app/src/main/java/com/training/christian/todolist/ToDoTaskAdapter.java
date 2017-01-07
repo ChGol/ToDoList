@@ -11,6 +11,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoViewHolder> {
@@ -39,10 +40,13 @@ public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoVi
         //1 Pobranie elementu danyh na poycji position
         ToDoTask task = mTasks.get(position);
         //2 uzupełnienie widoku holdera na podstawie pobraengo obiektu
-        holder.mTilte.setText(task.getName());
-        holder.mDone.setChecked(task.isDone());
+        holder.mBlockListeners = true;// Blokujemy wysylanie powIADOMIEN O ZMIANIE CHECKBOXA i click
         holder.mCurrentTask = task;
         holder.mCurrentPosition = position;
+        holder.mTilte.setText(task.getName());
+        holder.mDone.setChecked(task.isDone());
+        holder.mBlockListeners = false;
+        // odblokowujemy powiadomienia, zeby poprawnie reagowac na zdarzenia uzytkownika
     }
 
     @Override
@@ -59,6 +63,9 @@ public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoVi
 
         ToDoTask mCurrentTask;
         int mCurrentPosition;
+        //True ponieważ na początku kiedy powstaje wiersz i jest przed przypisanie ierwszego zadania
+        //nie chcemy zeby uruchamialy sie jakiekolwiek funkcje dotyczace Onclick cy onChecked
+        boolean mBlockListeners = true;
 
         public ToDoViewHolder(View itemView) {
             super(itemView);
@@ -66,14 +73,24 @@ public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoVi
         }
 
         @OnClick
-        void onItemClick(){
-            if (mClickListener!=null){
+        void onItemClick() {
+            if (mClickListener != null && !mBlockListeners) {
                 mClickListener.onClick(mCurrentTask, mCurrentPosition);
+            }
+        }
+
+
+        @OnCheckedChanged(R.id.task_done)
+        void onCheckedChange(boolean checked) {
+            if (mClickListener != null && !mBlockListeners) {
+                mClickListener.onTaskDoneChanged(mCurrentTask, mCurrentPosition, checked);
             }
         }
     }
 
     public interface OnClickListener {
         void onClick(ToDoTask task, int position);
+
+        void onTaskDoneChanged(ToDoTask task, int position, boolean isDone);
     }
 }

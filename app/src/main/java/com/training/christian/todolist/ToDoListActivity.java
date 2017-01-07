@@ -29,7 +29,6 @@ public class ToDoListActivity extends AppCompatActivity implements ToDoTaskAdapt
         // Układ pionowy - 1 element a wiersz
         mToDoList.setLayoutManager(new LinearLayoutManager(this));
 
-
         adapter = new ToDoTaskAdapter(mTaskDatabase.getTask(), this);
         mToDoList.setAdapter(adapter);
     }
@@ -46,7 +45,6 @@ public class ToDoListActivity extends AppCompatActivity implements ToDoTaskAdapt
         getMenuInflater().inflate(R.menu.menu_todolist, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
 
 
     @Override
@@ -68,7 +66,12 @@ public class ToDoListActivity extends AppCompatActivity implements ToDoTaskAdapt
         startActivity(createTaskIntent);
     }
 
-
+    @Override
+    public void onTaskDoneChanged(ToDoTask task, int position, boolean isDone) {
+        //Toast.makeText(this, "Done "+position+" IsDone "+ isDone, Toast.LENGTH_LONG).show();
+        task.setDone(isDone);
+        mTaskDatabase.updateTask(task, position);
+    }
 
 
 }
