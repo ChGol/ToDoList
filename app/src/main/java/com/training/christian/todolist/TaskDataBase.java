@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface TaskDataBase {
 
-    List<ToDoTask> getTask();
+    List<ToDoTask> getTasks();
 
     void addTask(ToDoTask task);
 
-    ToDoTask getTask(int position);
+     ToDoTask getTask(int position);
 
     void updateTask(ToDoTask task, int position);
 

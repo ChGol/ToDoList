@@ -19,9 +19,9 @@ public class ToDoTaskAdapter extends RecyclerView.Adapter<ToDoTaskAdapter.ToDoVi
     private List<ToDoTask> mTasks;
     private OnClickListener mClickListener;
 
-    public ToDoTaskAdapter(List<ToDoTask> mTasks, OnClickListener mClickListener) {
-        this.mTasks = mTasks;
-        this.mClickListener = mClickListener;
+    public ToDoTaskAdapter(List<ToDoTask> tasks, OnClickListener clickListener) {
+        mTasks = tasks;
+        mClickListener = clickListener;
     }
 
     public void setTasks(List<ToDoTask> tasks) {

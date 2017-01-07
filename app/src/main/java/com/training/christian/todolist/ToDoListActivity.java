@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -31,14 +33,14 @@ public class ToDoListActivity extends AppCompatActivity implements ToDoTaskAdapt
         // Układ pionowy - 1 element a wiersz
         mToDoList.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new ToDoTaskAdapter(mTaskDatabase.getTask(), this);
+        adapter = new ToDoTaskAdapter(mTaskDatabase.getTasks(), this);
         mToDoList.setAdapter(adapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        adapter.setTasks(mTaskDatabase.getTask());
+        adapter.setTasks(mTaskDatabase.getTasks());
 
     }
 
@@ -72,7 +74,10 @@ public class ToDoListActivity extends AppCompatActivity implements ToDoTaskAdapt
     public void onTaskDoneChanged(ToDoTask task, int position, boolean isDone) {
         //Toast.makeText(this, "Done "+position+" IsDone "+ isDone, Toast.LENGTH_LONG).show();
         task.setDone(isDone);
+        task.setDateCreated(new Date());
         mTaskDatabase.updateTask(task, position);
+        //refreshListData();
+
     }
 
 

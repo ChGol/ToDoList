@@ -26,9 +26,12 @@ public class SQlLiteTaskDatabase implements TaskDataBase {
     }
 
     @Override
-    public List<ToDoTask> getTask() {
+    public List<ToDoTask> getTasks() {
         try {
-            return mDao.queryForAll();
+            return mDao.queryBuilder()
+                    .orderBy("done", true)
+                    .orderBy("dateCreated", false)
+                    .query();
         } catch (SQLException e) {
             e.printStackTrace();
         }

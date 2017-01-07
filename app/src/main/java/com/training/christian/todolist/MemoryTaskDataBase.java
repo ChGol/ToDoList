@@ -9,7 +9,7 @@ public class MemoryTaskDataBase implements TaskDataBase {
     private static List<ToDoTask> mTasks = new LinkedList<>();
 
     @Override
-    public List<ToDoTask> getTask() {
+    public List<ToDoTask> getTasks() {
         return Collections.unmodifiableList(mTasks);
     }
 
