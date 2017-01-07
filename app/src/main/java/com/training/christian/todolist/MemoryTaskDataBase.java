@@ -15,6 +15,16 @@ public class MemoryTaskDataBase implements TaskDataBase {
 
     @Override
     public void addTask(ToDoTask task) {
-    mTasks.add(task);
+        mTasks.add(task);
+    }
+
+    @Override
+    public ToDoTask getTask(int position) {
+        return mTasks.get(position);
+    }
+
+    @Override
+    public void updateTask(ToDoTask task, int position) {
+        mTasks.set(position, task);
     }
 }

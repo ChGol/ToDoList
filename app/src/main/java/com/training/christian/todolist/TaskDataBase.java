@@ -8,4 +8,8 @@ public interface TaskDataBase {
 
     void addTask(ToDoTask task);
 
+    ToDoTask getTask(int position);
+
+    void updateTask(ToDoTask task, int position);
+
 }

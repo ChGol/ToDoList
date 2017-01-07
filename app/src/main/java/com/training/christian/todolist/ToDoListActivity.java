@@ -61,6 +61,14 @@ public class ToDoListActivity extends AppCompatActivity implements ToDoTaskAdapt
 
     @Override
     public void onClick(ToDoTask task, int position) {
-        Toast.makeText(this, "Klik "+position, Toast.LENGTH_SHORT).show();
+        //zamiast Toast nowy Intent
+        //Toast.makeText(this, "Klik "+position, Toast.LENGTH_SHORT).show();
+        Intent createTaskIntent = new Intent(this, TaskCreateActivity.class);
+        createTaskIntent.putExtra("pos", position);
+        startActivity(createTaskIntent);
     }
+
+
+
+
 }

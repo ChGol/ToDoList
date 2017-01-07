@@ -20,22 +20,36 @@ public class TaskCreateActivity extends AppCompatActivity {
     @BindView(R.id.task_note)
     EditText mTaskNote;
 
+    private int mPosition = -1;
+    private ToDoTask mTask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_create);
         ButterKnife.bind(this);
 
+        if (getIntent().hasExtra("pos")) {
+            mPosition = getIntent().getIntExtra("pos", -1);
+            mTask = mTaskDatabase.getTask(mPosition);
+            mTaskTitle.setText(mTask.getName());
+            mTaskNote.setText(mTask.getNote());
+        }
+
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
     }
 
     @OnClick(R.id.btn_save)
     void onSaveClick() {
-        ToDoTask task = new ToDoTask();
+        ToDoTask task = mTask != null ? mTask : new ToDoTask();
         task.setDateCreated(new Date());
         task.setName(mTaskTitle.getText().toString());
         task.setNote(mTaskNote.getText().toString());
 
+        if (mPosition == -1)
+            mTaskDatabase.addTask(task);
+        else
+            mTaskDatabase.updateTask(task, mPosition);
         mTaskDatabase.addTask(task);
 
         finish();
