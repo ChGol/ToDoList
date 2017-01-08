@@ -1,4 +1,6 @@
-package com.akademiakodu.todolist;
+package com.akademiakodu.todolist.database;
+
+import com.akademiakodu.todolist.model.TodoTask;
 
 import java.util.List;
 

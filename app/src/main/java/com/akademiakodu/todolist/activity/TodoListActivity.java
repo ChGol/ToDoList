@@ -1,4 +1,4 @@
-package com.akademiakodu.todolist;
+package com.akademiakodu.todolist.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import com.akademiakodu.todolist.database.ITaskDatabase;
+import com.akademiakodu.todolist.R;
+import com.akademiakodu.todolist.database.SqliteTaskDatabase;
+import com.akademiakodu.todolist.model.TodoTask;
+import com.akademiakodu.todolist.adapter.TodoTaskAdapter;
 
 import java.util.Date;
 

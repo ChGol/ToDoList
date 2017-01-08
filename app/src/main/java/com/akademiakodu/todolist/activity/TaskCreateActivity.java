@@ -1,4 +1,4 @@
-package com.akademiakodu.todolist;
+package com.akademiakodu.todolist.activity;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -11,6 +11,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.akademiakodu.todolist.database.ITaskDatabase;
+import com.akademiakodu.todolist.R;
+import com.akademiakodu.todolist.database.SqliteTaskDatabase;
+import com.akademiakodu.todolist.model.TodoTask;
 
 import java.util.Calendar;
 import java.util.Date;

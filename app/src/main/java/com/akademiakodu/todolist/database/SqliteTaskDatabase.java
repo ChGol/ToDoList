@@ -1,7 +1,8 @@
-package com.akademiakodu.todolist;
+package com.akademiakodu.todolist.database;
 
 import android.content.Context;
 
+import com.akademiakodu.todolist.model.TodoTask;
 import com.j256.ormlite.android.AndroidConnectionSource;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;

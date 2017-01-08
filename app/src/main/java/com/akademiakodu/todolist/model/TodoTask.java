@@ -1,4 +1,4 @@
-package com.akademiakodu.todolist;
+package com.akademiakodu.todolist.model;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
