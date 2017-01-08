@@ -39,9 +39,9 @@ public class ToDoNotificationService extends IntentService {
 
         Notification notification = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Title")
+                .setContentTitle(task.getName())
                 .setContentInfo("Info")
-                .setContentText("Text")
+                .setContentText("Przypominacz")
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setTicker("Ticker Text")
                 .setPriority(NotificationCompat.PRIORITY_MAX)

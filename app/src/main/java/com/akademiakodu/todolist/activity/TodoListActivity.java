@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.akademiakodu.todolist.NotificationPlaner;
 import com.akademiakodu.todolist.database.ITaskDatabase;
 import com.akademiakodu.todolist.R;
 import com.akademiakodu.todolist.database.SqliteTaskDatabase;
@@ -47,6 +48,7 @@ public class TodoListActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         refreshListData();
+        new NotificationPlaner(mTaskDatabase, this).planNotifications();
     }
 
     private void refreshListData() {

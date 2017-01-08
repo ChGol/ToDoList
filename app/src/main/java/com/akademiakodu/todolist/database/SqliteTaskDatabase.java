@@ -10,6 +10,7 @@ import com.j256.ormlite.support.ConnectionSource;
 
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class SqliteTaskDatabase implements ITaskDatabase {
@@ -36,6 +37,20 @@ public class SqliteTaskDatabase implements ITaskDatabase {
             e.printStackTrace();
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public List<TodoTask> getFutureTaskaWithReminder(Date now) {
+        try {
+            return mDao.queryBuilder()
+                    .where().eq("reminder", true)
+                    .and().ge("reminderDate", now)
+                    .query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return Collections.EMPTY_LIST;
     }
 
     @Override

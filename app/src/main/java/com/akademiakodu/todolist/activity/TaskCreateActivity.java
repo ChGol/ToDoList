@@ -127,9 +127,6 @@ public class TaskCreateActivity extends AppCompatActivity {
             mTaskDatabase.addTask(task);
         } else {
             mTaskDatabase.updateTask(task, mPosition);
-            // Uruchomienie uslugi powiadomenia
-            Intent service = new Intent(this, ToDoNotificationService.class);
-            service.putExtra("id", task.getId());
         }
 
         finish();
