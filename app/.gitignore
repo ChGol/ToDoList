@@ -5,4 +5,15 @@
 .pro
 local.properties
 gradle.properties
+*.iml
+/local.properties
+/gradle.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+/.idea
+proguard-rules.pro
 
