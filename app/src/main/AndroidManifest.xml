@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.TaskCreateActivity"></activity>
+        <activity
+            android:name=".activity.TaskPreviewActivity"
+            android:windowSoftInputMode="stateHidden" />
 
         <service
             android:name=".service.ToDoNotificationService"
@@ -28,7 +31,7 @@
             android:name=".receiver.BootCompleteReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
