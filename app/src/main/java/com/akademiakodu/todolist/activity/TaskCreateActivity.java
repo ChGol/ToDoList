@@ -1,6 +1,7 @@
 package com.akademiakodu.todolist.activity;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.akademiakodu.todolist.database.ITaskDatabase;
 import com.akademiakodu.todolist.R;
 import com.akademiakodu.todolist.database.SqliteTaskDatabase;
 import com.akademiakodu.todolist.model.TodoTask;
+import com.akademiakodu.todolist.service.ToDoNotificationService;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -125,6 +127,9 @@ public class TaskCreateActivity extends AppCompatActivity {
             mTaskDatabase.addTask(task);
         } else {
             mTaskDatabase.updateTask(task, mPosition);
+            // Uruchomienie uslugi powiadomenia
+            Intent service = new Intent(this, ToDoNotificationService.class);
+            service.putExtra("id", task.getId());
         }
 
         finish();
